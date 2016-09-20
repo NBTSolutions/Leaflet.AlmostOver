@@ -62,9 +62,10 @@ L.Handler.AlmostOver = L.Handler.extend({
             }, this);
         }
         else {
-            if (typeof this.indexLayer == 'function') {
-                this.indexLayer(layer);
-            }
+            // no need to index the layer again since it will be indexed elsewhere
+            // if (typeof this.indexLayer == 'function') {
+            //     this.indexLayer(layer);
+            // }
             this._layers.push(layer);
         }
     },
@@ -76,9 +77,9 @@ L.Handler.AlmostOver = L.Handler.extend({
             }, this);
         }
         else {
-            if (typeof this.unindexLayer == 'function') {
-                this.unindexLayer(layer);
-            }
+            // if (typeof this.unindexLayer == 'function') {
+            //     this.unindexLayer(layer);
+            // }
             var index = this._layers.indexOf(layer);
             this._layers.splice(index, 1);
         }
