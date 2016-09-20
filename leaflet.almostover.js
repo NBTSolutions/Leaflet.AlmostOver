@@ -55,31 +55,32 @@ L.Handler.AlmostOver = L.Handler.extend({
         this._map.off('click dblclick', this._onMouseClick, this);
     },
 
-    addLayer: function (layer) {
+    addLayer: function (layer, indexLayer) {
+        indexLayer = typeof indexLayer === 'undefined' ? true : indexLayer;
         if (typeof layer.eachLayer == 'function') {
             layer.eachLayer(function (l) {
-                this.addLayer(l);
+                this.addLayer(l, indexLayer);
             }, this);
         }
         else {
-            // no need to index the layer again since it will be indexed elsewhere
-            // if (typeof this.indexLayer == 'function') {
-            //     this.indexLayer(layer);
-            // }
+            if (indexLayer && typeof this.indexLayer == 'function') {
+                this.indexLayer(layer);
+            }
             this._layers.push(layer);
         }
     },
 
-    removeLayer: function (layer) {
+    removeLayer: function (layer, unindexLayer) {
+        unindexLayer = typeof unindexLayer === 'undefined' ? true : unindexLayer;
         if (typeof layer.eachLayer == 'function') {
             layer.eachLayer(function (l) {
-                this.removeLayer(l);
+                this.removeLayer(l, unindexLayer);
             }, this);
         }
         else {
-            // if (typeof this.unindexLayer == 'function') {
-            //     this.unindexLayer(layer);
-            // }
+            if (unindexLayer && typeof this.unindexLayer == 'function') {
+                this.unindexLayer(layer);
+            }
             var index = this._layers.indexOf(layer);
             this._layers.splice(index, 1);
         }
