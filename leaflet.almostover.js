@@ -8,7 +8,7 @@ L.Handler.AlmostOver = L.Handler.extend({
     includes: L.Mixin.Events,
 
     options: {
-        distance: 25,   // pixels
+        distance: 5,   // pixels
         samplingPeriod: 50,  // ms
     },
 
