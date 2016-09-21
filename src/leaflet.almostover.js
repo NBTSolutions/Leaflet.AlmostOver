@@ -8,7 +8,7 @@ L.Handler.AlmostOver = L.Handler.extend({
     includes: L.Mixin.Events,
 
     options: {
-        distance: 5,   // pixels
+        distance: 25,   // pixels
         samplingPeriod: 50,  // ms
     },
 
@@ -53,6 +53,10 @@ L.Handler.AlmostOver = L.Handler.extend({
         this._map.off('mousemovesample');
         this._map.off('mousemove', this.__mouseMoveSampling, this);
         this._map.off('click dblclick', this._onMouseClick, this);
+    },
+
+    setOptions: function(options) {
+        this.options = L.extend(this.options, options);
     },
 
     addLayer: function (layer, indexLayer) {
